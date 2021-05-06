@@ -1,0 +1,47 @@
+{
+    "name": "api",
+    "version": "1.0.0",
+    "description": "An API which act as a core interface between the UI and the microservices",
+    "main": "app.js",
+    "scripts": {
+        "test": "",
+        "integration-test": "mocha test/integration/user.test.js",
+        "start": "nodemon -L app.js",
+        "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
+    },
+    "author": "Winzone",
+    "license": "ISC",
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "minimist": "^1.2.0",
+        "nyc": "^14.1.1",
+        "path": "^0.12.7",
+        "supertest": "^3.4.1"
+    },
+    "dependencies": {
+        "app-root-path": "^2.2.1",
+        "authenticator": "^1.1.5",
+        "axios": "^0.21.1",
+        "bcryptjs": "^2.4.3",
+        "branca": "^0.3.0",
+        "compression": "^1.7.4",
+        "config": "^3.2.2",
+        "cors": "^2.8.5",
+        "cross-fetch": "^3.0.6",
+        "dotenv": "^8.1.0",
+        "express": "^4.17.1",
+        "fs": "0.0.1-security",
+        "helmet": "^3.21.1",
+        "hi-base32": "^0.5.0",
+        "i18n-nodejs": "^3.0.0",
+        "ioredis": "^4.14.1",
+        "joi": "^17.2.1",
+        "jsonwebtoken": "^8.5.1",
+        "lodash": "^4.17.20",
+        "moment": "^2.24.0",
+        "mongoose": "^5.6.10",
+        "mongoose-type-url": "^1.0.6",
+        "nodemon": "^2.0.6",
+        "yargs-parser": "^13.1.0"
+    }
+}

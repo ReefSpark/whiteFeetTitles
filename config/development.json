@@ -1,0 +1,21 @@
+{
+	"encryption": {
+		"key": "v5uU3$c?82*=AzA5",
+		"realKey": "!$SHIBAU#.N^RAMACHIJb0*7wv3nhe.$"
+	},
+	"secrete": {
+		"issuer": "whitefeet",
+		"domain": "whitefeet.co.in",
+		"key": " --$_VM?LLx3XK95ZJ",
+		"expiry": "1d"
+	},
+	"site": {
+		"url": "http://localhost:9900",
+		"version": "v1",
+		"hmtLink": 2
+	},
+	"activation": {
+		"expiryTime": 1800,
+		"timeZone": "UTC"
+	}
+}
