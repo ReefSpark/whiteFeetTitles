@@ -1,13 +1,6 @@
 const Joi = require('joi');
 
-exports.addProduct = (req) => {
-    let schema = Joi.array().items(
-        Joi.object().keys(Object.assign({
-            name: Joi.string().required()
-        })));
 
-    return schema.validate(req, { abortEarly: false })
-}
 exports.updateProduct = (req) => {
     let schema = Joi.object().keys(Object.assign({
         "Billing_basic_details": Joi.object().keys(Object.assign({

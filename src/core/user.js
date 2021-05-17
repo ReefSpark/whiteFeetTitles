@@ -22,9 +22,10 @@ class User extends controller {
                 return res.status(400).send(this.errorMsgFormat({ message: "Email or Password Incorrect" }))
             }
             checkEmail.login_time = new Date();
+            let role = checkEmail.role == 1 ? 'admin' : 'sales'
             checkEmail.save()
             return res.status(200).send(this.successFormat({
-                role: checkEmail.role,
+                role: role,
                 token: await this.createToken(checkEmail, res)
             }))
         }

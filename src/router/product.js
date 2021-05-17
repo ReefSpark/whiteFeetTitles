@@ -10,10 +10,6 @@ const auth = require('../middleware/auth');
 
 router.post('/', auth, async (req, res) => {
     try {
-        let { error } = await addProduct(req.body)
-        if (error) {
-            return res.status(400).send(controller.errorFormat(error.message));
-        }
         return product.addProduct(req, res);
     }
     catch (err) {

@@ -13,12 +13,24 @@ class Product extends controller {
                 if (_.isEmpty(check)) {
                     return res.status(400).send(this.errorMsgFormat("ID didn't match"));
                 }
-                await billingAndProduct.findOneAndUpdate({ _id: req.query.id }, { $push: { product_details: data } });
+                let i = 0;
+                let getData = data.products
+                while (i < getData.length) {
+                    await billingAndProduct.findOneAndUpdate({ _id: req.query.id }, { $push: { product_details: { name: getData[i] } } });
+                    i++;
+                }
                 return res.status(200).send(this.successFormat('Added Successfully'))
+            }
+            let i = 0;
+            let payload = [];
+            let getData = data.products
+            while (i < getData.length) {
+                payload.push({ name: getData[i] })
+                i++;
             }
             let details = {
                 user: req.user.user,
-                product_details: data
+                product_details: payload
             }
 
             await new billingAndProduct(details).save();
@@ -32,7 +44,21 @@ class Product extends controller {
     async getProduct(req, res) {
         try {
             let result = await billingAndProduct.findOne({}).sort({ created_date: -1 });
-            return res.status(200).send(this.successFormat(result))
+            let i = 0;
+            let products = []
+            let getData = result.product_details;
+            while (i < getData.length) {
+                products.push(getData[i].name)
+                i++;
+            }
+            let payload = {
+                _id:result._id,
+                user:result.user,
+                product_details:products,
+                created_date:result.created_date,
+                modified_date_time:result.modified_date_time
+            }
+            return res.status(200).send(this.successFormat(payload))
         } catch (err) {
             return res.status(400).send(this.errorMsgFormat(err.message));
         }
