@@ -87,6 +87,7 @@ class User extends controller {
             var end = new Date();
             end.setHours(23, 59, 59, 999);
             let result = await billingAndProduct.find({ created_date: { $gte: start, $lt: end } });
+            console.log("Result:",result)
             return res.status(200).send(this.successFormat(result))
         } catch (err) {
             return res.status(400).send(this.errorMsgFormat(err.message));

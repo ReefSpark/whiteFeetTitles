@@ -11,14 +11,7 @@ let schema = new mongoose.Schema({
         "mode_of_payment": String,
         "check_details": Number
     },
-    "product_details": [
-        {
-            "name": String,
-            "nos": Number,
-            "rate": Number,
-            "total_amount": Number
-        }
-    ],
+    "product_details": [String],
     "gst_applied": String,
     "net_amount": Number,
 }, {
