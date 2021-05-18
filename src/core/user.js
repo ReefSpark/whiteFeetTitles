@@ -14,12 +14,12 @@ class User extends controller {
             let data = req.body;
             let checkEmail = await users.findOne({ mobile: data.mobile });
             if (_.isEmpty(checkEmail)) {
-                return res.status(400).send(this.errorMsgFormat({ message: "Email or Password Incorrect" }))
+                return res.status(200).send(this.errorMsgFormat({ message: "Email or Password Incorrect" }))
             }
             //data.password = await helpers.decrypt(data.password, res);
             let passwordCompare = await bcrypt.compareSync(data.password, checkEmail.password);
             if (!passwordCompare) {
-                return res.status(400).send(this.errorMsgFormat({ message: "Email or Password Incorrect" }))
+                return res.status(200).send(this.errorMsgFormat({ message: "Email or Password Incorrect" }))
             }
             checkEmail.login_time = new Date();
             let role = checkEmail.role == 1 ? 'admin' : 'sales'

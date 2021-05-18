@@ -16,7 +16,7 @@ class Product extends controller {
                 let i = 0;
                 let getData = data.products
                 while (i < getData.length) {
-                    await billingAndProduct.findOneAndUpdate({ _id: req.query.id }, { $push: { product_details: { name: getData[i] } } });
+                    await billingAndProduct.findOneAndUpdate({ _id: req.query.id }, { $push: { product_details: `name:${getData[i]}` } });
                     i++;
                 }
                 return res.status(200).send(this.successFormat('Added Successfully'))
@@ -25,14 +25,13 @@ class Product extends controller {
             let payload = [];
             let getData = data.products
             while (i < getData.length) {
-                payload.push({ name: getData[i] })
+                payload.push(`name:${getData[i]}`)
                 i++;
             }
             let details = {
                 user: req.user.user,
                 product_details: payload
             }
-
             await new billingAndProduct(details).save();
             return res.status(200).send(this.successFormat("Added Successfully"));
         }
@@ -48,15 +47,15 @@ class Product extends controller {
             let products = []
             let getData = result.product_details;
             while (i < getData.length) {
-                products.push(getData[i].name)
+                products.push(getData[i])
                 i++;
             }
             let payload = {
-                _id:result._id,
-                user:result.user,
-                product_details:products,
-                created_date:result.created_date,
-                modified_date_time:result.modified_date_time
+                _id: result._id,
+                user: result.user,
+                product_details: products,
+                created_date: result.created_date,
+                modified_date_time: result.modified_date_time
             }
             return res.status(200).send(this.successFormat(payload))
         } catch (err) {
