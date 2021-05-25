@@ -19,7 +19,6 @@ router.post('/', auth, async (req, res) => {
 
 router.get('/', auth,async (req, res) => {
     try {
-
         return product.getProduct(req, res);
     }
     catch (err) {
@@ -27,9 +26,8 @@ router.get('/', auth,async (req, res) => {
     }
 });
 
-router.patch('/:id', auth,async (req, res) => {
+router.patch('/', auth,async (req, res) => {
     try {
-
         return product.updateProduct(req, res);
     }
     catch (err) {

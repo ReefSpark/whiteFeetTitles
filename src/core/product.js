@@ -65,12 +65,18 @@ class Product extends controller {
 
     async updateProduct(req, res) {
         try {
-            let checkDetails = await billingAndProduct.findOne({ _id: req.params.id });
-            if (_.isEmpty(checkDetails)) {
-                return res.status(400).send(this.errorMsgFormat("ID didn't match"));
+            if (req.query.id) {
+                let data = req.body;
+                let check = await billingAndProduct.findOne({ _id: req.query.id });
+                if (_.isEmpty(check)) {
+                    return res.status(400).send(this.errorMsgFormat("ID didn't match"));
+                }
+                await billingAndProduct.findOneAndUpdate({ _id: req.query.id }, data);
+                return res.status(200).send(this.successFormat('Updated Successfully'))
             }
-            await billingAndProduct.findOneAndUpdate({ _id: req.params.id }, req.body);
-            return res.status(200).send(this.successFormat("Updated Successfully"));
+            let data = req.body;
+            await new billingAndProduct(data).save();
+            return res.status(200).send(this.successFormat("Added Successfully"));
         } catch (err) {
             return res.status(400).send(this.errorMsgFormat(err.message));
         }
